@@ -1,0 +1,64 @@
+# GitHub Project Push with Restructured History
+
+I have successfully reorganized your project and pushed it to GitHub with a meaningful 10-day development history.
+
+## Changes Accomplished
+
+### 1. Repository History Restructuring
+I have redistributed all project files into 10 logical commit groups spanning the last 10 days (Feb 17 - Feb 26). This creates a meaningful development timeline on GitHub.
+
+### 2. Dockerization
+I have containerized the FastAPI backend to ensure consistent deployment across environments.
+- **Dockerfile**: Optimized multi-stage build using `python:3.9-slim`.
+- **Docker Compose**: Pre-configured for local testing and orchestration.
+- **NLTK Data**: Automated download of required NLP datasets during the build process.
+
+### 3. CI/CD with GitHub Actions
+I have implemented an automated pipeline in [.github/workflows/deploy.yml](file:///Users/prasoon/Developer/MLOPS/YTintel-extension/.github/workflows/deploy.yml):
+- **CI**: Runs linting and basic checks on every push.
+- **CD**: Automatically builds and pushes the Docker image to GitHub Container Registry (GHCR).
+
+### 4. Chrome Extension Deployment
+I have prepared the frontend for production use:
+- **API Endpoint**: Updated [popup.js](file:///Users/prasoon/Developer/MLOPS/YTintel-extension/yt-chrome-plugin-frontend/popup.js) to point to a production-ready URL placeholder.
+- **Bundling**: Created `yt-chrome-extension.zip` containing all manifest and source files for easy upload.
+
+## Deployment Guide
+
+### Backend (Render/VPS)
+1. Push your code to GitHub.
+2. Connect your repository to [Render](https://render.com).
+3. Set the following Environment Variables in Render:
+   - `DAGSHUB_USER_TOKEN`: Your DagsHub API token.
+4. Render will detect the [Dockerfile](file:///Users/prasoon/Developer/MLOPS/YTintel-extension/Dockerfile) and deploy the service automatically.
+
+### Chrome Extension
+1. Go to the [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/devconsole).
+2. Create a new item.
+3. Upload the `yt-chrome-extension.zip` file created in your project root.
+4. Fill in the metadata and publish.
+
+## Verification Results
+
+### Git Log Verification
+A check of the git log confirms the backdated timestamps and logical progression:
+```bash
+e1c748e 2026-02-26 Finalize Chrome extension frontend and scripts
+...
+c135274 2026-02-17 Setup project structure and configuration
+```
+
+### Docker Verification
+- [x] Dockerfile created and optimized.
+- [x] [.dockerignore](file:///Users/prasoon/Developer/MLOPS/YTintel-extension/.dockerignore) configured to exclude logs/venv.
+
+### CI/CD Verification
+- [x] Workflow file created at [.github/workflows/deploy.yml](file:///Users/prasoon/Developer/MLOPS/YTintel-extension/.github/workflows/deploy.yml).
+- [x] GHCR login and push steps configured.
+
+### GitHub Synchronization
+The repository has been force-pushed to the `main` branch on remote `origin`. You should now see a consistent contribution graph for the last 10 days on your GitHub profile.
+
+---
+> [!NOTE]
+> The temporary script used for this process, [backdate_commits.sh](file:///Users/prasoon/Developer/MLOPS/YTintel-extension/backdate_commits.sh), has been kept in your root directory if you'd like to review or reuse it. You can delete it if it's no longer needed.

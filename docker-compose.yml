@@ -9,6 +9,9 @@ services:
       - .env
     environment:
       - DAGSHUB_USER_TOKEN=${DAGSHUB_USER_TOKEN}
+      - DAGSHUB_TOKEN=${DAGSHUB_USER_TOKEN}
+      - MLFLOW_TRACKING_USERNAME=prasu202324
+      - MLFLOW_TRACKING_PASSWORD=${DAGSHUB_USER_TOKEN}
     volumes:
       - .:/app
     restart: always
