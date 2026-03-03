@@ -13,7 +13,7 @@
   ],
   "host_permissions": [
     "http://localhost:8000/*",
-    "https://www.googleapis.com/*",
+    "https://ytintel-extension.onrender.com/*",
     "https://*.youtube.com/*"
   ]
 }
