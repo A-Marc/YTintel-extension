@@ -1,6 +1,7 @@
 
 fastapi
 uvicorn
+requests
 joblib
 lightgbm
 matplotlib

@@ -7,6 +7,7 @@ import pandas as pd
 import mlflow
 import dagshub
 import os
+import requests
 from fastapi.middleware.cors import CORSMiddleware
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
@@ -140,6 +141,48 @@ def load_model():
 @app.get("/")
 def home():
     return {"message": "Welcome to our FastAPI backend API"}
+
+@app.get("/fetch_comments")
+def get_youtube_comments(video_id: str):
+    api_key = os.getenv("youtube") or os.getenv("YOUTUBE_API_KEY")
+    if not api_key:
+        raise HTTPException(status_code=500, detail="YouTube API Key not configured on server.")
+
+    url = f"https://www.googleapis.com/youtube/v3/commentThreads"
+    comments = []
+    page_token = ""
+
+    try:
+        while len(comments) < 500:
+            params = {
+                "part": "snippet",
+                "videoId": video_id,
+                "maxResults": 100,
+                "key": api_key
+            }
+            if page_token:
+                params["pageToken"] = page_token
+            
+            response = requests.get(url, params=params)
+            response.raise_for_status()
+            data = response.json()
+
+            if "items" in data:
+                for item in data["items"]:
+                    snippet = item["snippet"]["topLevelComment"]["snippet"]
+                    comments.append({
+                        "text": snippet.get("textOriginal", ""),
+                        "timestamp": snippet.get("publishedAt", ""),
+                        "authorId": snippet.get("authorChannelId", {}).get("value", "Unknown")
+                    })
+            
+            page_token = data.get("nextPageToken")
+            if not page_token:
+                break
+
+        return {"comments": comments}
+    except requests.exceptions.RequestException as e:
+        raise HTTPException(status_code=502, detail=f"Error communicating with YouTube API: {str(e)}")
 
 
 @app.post("/predict")

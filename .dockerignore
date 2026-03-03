@@ -12,7 +12,6 @@ ENV
 notebooks
 data
 *.log
-*.pkl
 mlflow.db
 yt-chrome-plugin-frontend
 backdate_commits.sh
