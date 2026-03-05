@@ -1,4 +1,4 @@
-# 🚀 YTintel: YouTube Sentiment Insights & MLOps Pipeline
+# 🚀 YTintel: YouTube Sentiment Insights & MLOps Pipeline Marc
 
 [![Python 3.9](https://img.shields.io/badge/python-3.9-blue.svg)](https://www.python.org/downloads/release/python-390/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.95.1-009688.svg)](https://fastapi.tiangolo.com/)
